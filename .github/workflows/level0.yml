@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Make scripts executable
+        run: chmod +x scripts/*.sh
+
       - name: Build image
         run: ./scripts/build.sh
 
