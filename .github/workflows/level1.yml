@@ -1,0 +1,21 @@
+name: Routes
+
+on:
+  workflow_run:
+    workflows: ["Docker"]
+    types: [completed]
+
+jobs:
+  docker-smoke:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: ./scripts/build.sh
+      - name: Run container
+        run: ./scripts/run.sh
+      - name: Wait for /health
+        run: ./scripts/wait_for_health.sh
+      - name: Tests
+        run: docker exec book-app-ci pytest -q -W ignore

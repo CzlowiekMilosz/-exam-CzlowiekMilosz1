@@ -1,0 +1,20 @@
+name: Docker
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  docker-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: ./scripts/build.sh
+
+      - name: Run container
+        run: ./scripts/run.sh
+
+      - name: Wait for /health
+        run: ./scripts/wait_for_health.sh

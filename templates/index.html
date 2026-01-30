@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h1>Search for Books</h1>
+    <p class="lead">Find books from Open Library and add them to your collection.</p>
+    
+    <form method="GET" action="{{ url_for('search') }}" class="mt-4">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          name="q"
+          class="form-control"
+          placeholder="Search books..."
+          required
+        />
+        <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
